@@ -1,0 +1,15 @@
+[Unit]
+Description=[Lab6] User counter service.
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/contador
+Restart=always
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=%n
+
+[Install]
+WantedBy=multi-user.target

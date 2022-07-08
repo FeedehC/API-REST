@@ -1,0 +1,54 @@
+sudo netstat -anp | grep [port_num]
+curl http://localhost:[port_num]/[endpoint_get]
+curl -d [data] http://localhost:[port_num]/[endpoint_post]
+curl -X POST http://localhost:8537/increment
+cat nginx.txt >> test.txt
+
+sudo chmod +x ./run.sh
+sudo cp ./src/echo-server.service /etc/systemd/system/echo-server.service
+sudo systemctl daemon-reload
+sudo systemctl enable echo-server.service
+sudo systemctl start echo-server.service
+sudo systemctl status echo-server.service
+journalctl -f -u echo-server.service
+
+systemctl stop echo-server.service
+systemctl disable echo-server.service
+sudo rm /etc/systemd/system/echo-server.service
+systemctl daemon-reload
+sudo rm /usr/sbin/start-echo-server.sh
+systemctl reset-failed
+
+curl --request GET \
+        --url http://localhost:8082/api/users \
+        -u USER:SECRET \
+        --header 'accept: application/json' \
+        --header 'content-type: application/json'
+
+curl --request POST \
+    --url http://localhost:8082/api/users \
+    -u USER:SECRET \
+    --header 'accept: application/json' \
+    --header 'content-type: application/json' \
+    --data '{"username": "myuser", "password": "mypassword"}'
+
+curl --request GET \
+    --url http://www.lab6.com/api/users \
+    -u fred:fred \
+    --header 'accept: application/json' \
+    --header 'content-type: application/json'
+
+curl --request POST \
+    --url http://www.lab6.com/api/users \
+    -u fred:fred \
+    --header 'accept: application/json' \
+    --header 'content-type: application/json' \
+    --data '{"username": "subaru", "password": "subaru"}'
+
+sudo apt install -y libmicrohttpd-dev libjansson-dev libcurl4-gnutls-dev libgnutls28-dev libgcrypt20-dev libsystemd-dev
+sudo wget https://github.com/babelouest/ulfius/releases/download/v2.7.9/ulfius-dev-full_2.7.9_debian_buster_x86_64.tar.gz
+tar xf ulfius-dev-full_2.7.9_debian_buster_x86_64.tar.gz
+sudo dpkg -i liborcania-dev
+sudo dpkg -i libyder-dev
+sudo dpkg -i libulfius-dev
+
